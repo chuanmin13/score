@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Calculator</title>
+
+    <!-- google-font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Patua+One&family=Righteous&family=Titan+One&display=swap" rel="stylesheet">
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Concert One', 'Patua One','Righteous','Titan One', cursive;
+            height: 100%;
+            width: 100%;
+        }
+
+
+        /* 手機橫式 */
+        @media screen (min-width:768px) {
+            
+        }
+
+        /* 手機直式 */
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .info-text {
+            width: 100%;
+            text-align: left;
+            margin: 0 100px;
+        }
+
+
+        .calc-wrap {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+
+        .btn-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+        }
+
+        .scores-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card {
+            height: 100%;
+            width: 100%;
+        }
+        .score-card {
+            height: 100%;
+            width: 100%;
+            font-size: 200px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 20px;
+        }
+
+        .red-score {
+            background-color: #cd2424;
+        }
+        .blue-score {
+            background-color: #244ecd;
+        }
+
+        .btn {
+            width: 80px;
+            height: 60px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            background-color: #ddd;
+            font-size: 40px;
+            line-height: 30px;
+            font-weight: bolder;
+            color: #333;
+            transform: rotate(90deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+        .btn > span {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-wrap">
+        <!-- <div class="info-col">
+                <h1>Score Calculator</h1>
+                <div class="info-text">
+                    <h4>How to use:</h4>
+                    <p>1. Tap/click the score to add ONE point</p>
+                    <p>2. Use the arrow button to add or subtract point</p>
+                </div>
+            </div> -->
+        </div>
+        <div class="calc-wrap">
+            <div class="scores-wrap">
+                <div class="red-wrap card">
+                    <!-- <div class="red-btn btn-wrap">
+                        <div class="red-add btn"><span> &lt;</span></div>
+                        <div class="red-sub btn"><span> &gt;</span></div>
+                    </div> -->
+                    <div class="red-score score-card" data-color="red">0</div>
+                </div>
+                <div class="blue-wrap card">
+                    <div class="blue-score score-card" data-color="blue">10</div>
+                    <!-- <div class="blue-btn btn-wrap">
+                        <div class="blue-add btn"><span> &lt;</span></div>
+                        <div class="blue-sub btn"><span> &gt;</span></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        const redScore = document.querySelector('.red-score');
+        const blueScore = document.querySelector('.blue-score');
+
+        const redAdd = document.querySelector('.red-add');
+        const redSub = document.querySelector('.red-sub');
+        const blueAdd = document.querySelector('.blue-add');
+        const blueSub = document.querySelector('.blue-sub');
+
+        let red = 0;
+        let blue = 0;
+
+        const addScore = (this) => {
+            console.log(this);
+        }
+
+        redScore.addEventListener('click', addScore()
+        // ()=>{
+        //     // red++;
+        //     // // console.log(red);
+        //     // redScore.innerText = red;
+        // }
+        )
+    </script>
+</body>
+</html>
