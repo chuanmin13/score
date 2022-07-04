@@ -1,175 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score Calculator</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Score Calculator</title>
 
-    <!-- google-font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Patua+One&family=Righteous&family=Titan+One&display=swap" rel="stylesheet">
+        <!-- google-font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Concert+One&family=Arima&family=Kosugi+Maru&display=swap"
+            rel="stylesheet"
+        />
 
-    <style>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            html {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+                height: 100%;
+                width: 100%;
+                max-width: 768px;
+            }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Concert One', 'Patua One','Righteous','Titan One', cursive;
-            height: 100%;
-            width: 100%;
-        }
+            /* 手機直式 */
+            .container {
+                width: 100%;
+                height: 100%;
+            }
 
+            /* nav-bar */
+            .nav-wrap {
+                clip-path: circle(0px at 92% 35px);
+                transition: 1s;
+                position: relative;
+                z-index: 8;
+            }
 
-        /* 手機橫式 */
-        @media screen (min-width:768px) {
-            
-        }
+            .nav-wrap.open {
+                clip-path: circle(920px at 92% 35px);
+                -webkit-clip-path: circle(920px at 92% 35px);
+                opacity: 1;
+            }
 
-        /* 手機直式 */
-        .container {
-            width: 100%;
-            height: 100%;
-        }
+            .open-nav {
+                height: 100%;
+                width: 100%;
+                border-radius: 10px;
+                background-image: linear-gradient(
+                    135deg,
+                    #feb692 10%,
+                    #ea5455 100%
+                );
+                padding: 10px 0;
+                position: fixed;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                z-index: 8;
+            }
 
-        h1 {
-            margin: 20px 0;
-        }
+            .nav-list {
+                padding: 0 15%;
+            }
+            .open-nav h1 {
+                text-align: center;
+                font-size: 36px;
+                line-height: 50px;
+            }
+            .open-nav p,
+            .open-nav h4 {
+                font-size: 18px;
+                margin: 0;
+                line-height: 24px;
+            }
 
-        .info-text {
-            width: 100%;
-            text-align: left;
-            margin: 0 100px;
-        }
+            p.copy {
+                text-align: center;
+                font-size: 14px;
+                font-family: "Arima", cursive;
+                color: rgba(255, 255, 255, 0.6);
+                padding: 20px 0 10px;
+            }
 
+            .info-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding-bottom: 30px;
+                border-bottom: 3px dotted rgba(255, 255, 255, 0.7);
+            }
 
-        .calc-wrap {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
+            .setting-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                margin-top: 10px;
+            }
 
+            .btn {
+                border: none;
+                border-radius: 10px;
+                color: #fff;
+                opacity: 1;
+                transition: 0.3s;
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+            }
+            .btn:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
 
-        .btn-wrap {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 80px;
-        }
+            .resetBtn {
+                background-color: #333;
+                /* background-image: linear-gradient(
+                    to right,
+                    #a03a79 0%,
+                    #39407d 100%
+                ); */
+                font-size: 18px;
+                padding: 20px;
+            }
 
-        .scores-wrap {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
+            .input-wrap {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
 
-        .card {
-            height: 100%;
-            width: 100%;
-        }
-        .score-card {
-            height: 100%;
-            width: 100%;
-            font-size: 200px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            border-radius: 20px;
-        }
+            .input-wrap h3 {
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+                margin: 0;
+                padding-bottom: 3px;
+                border-bottom: 3px dotted #222;
+            }
 
-        .red-score {
-            background-color: #cd2424;
-        }
-        .blue-score {
-            background-color: #244ecd;
-        }
+            input {
+                border: none;
+                border-radius: 10px;
+                padding: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+            }
+            input:focus {
+                border: 2px solid #7474bf;
+            }
 
-        .btn {
-            width: 80px;
-            height: 60px;
-            border-radius: 10px;
-            border: 1px solid #eee;
-            background-color: #ddd;
-            font-size: 40px;
-            line-height: 30px;
-            font-weight: bolder;
-            color: #333;
-            transform: rotate(90deg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px;
-        }
-        .btn > span {
-            transform: translateY(-3px);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="text-wrap">
-        <!-- <div class="info-col">
-                <h1>Score Calculator</h1>
-                <div class="info-text">
-                    <h4>How to use:</h4>
-                    <p>1. Tap/click the score to add ONE point</p>
-                    <p>2. Use the arrow button to add or subtract point</p>
+            .setNameBtn {
+                background-color: rgb(55, 103, 80);
+                /* background-image: linear-gradient(
+                    to right,
+                    #4b6087 0%,
+                    #314d81 100%
+                ); */
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .resetNameBtn {
+                background-color: rgb(128, 44, 89);
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .startBtn {
+                background-color: rgb(36, 71, 99);
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            /* hamburger */
+            .hamburger {
+                width: 40px;
+                height: 40px;
+                position: fixed;
+                top: 0;
+                right: 0;
+                z-index: 9;
+                margin: 10px 20px;
+                /* background-color: #fff; */
+            }
+            .line1,
+            .line2,
+            .line3 {
+                width: 100%;
+                height: 5px;
+                border-radius: 5px;
+                /* background-color: rgb(202, 65, 103); */
+                /* background-color: #222; */
+                background-color: rgba(255, 255, 255, 0.7);
+                position: absolute;
+            }
+            .line1 {
+                top: 11px;
+                transition: 0.5s;
+            }
+
+            .line2 {
+                top: 20px;
+                transition: 0.7s ease;
+            }
+
+            .line3 {
+                top: 29px;
+                transition: 0.5s;
+            }
+
+            .hamburger.toggle .line1 {
+                transform: rotate(-45deg) translate(-6px, 6px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line3 {
+                transform: rotate(45deg) translate(-6px, -6px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line2 {
+                width: 0;
+                background-color: #fff;
+            }
+
+            .outside-reset {
+                width: 40px;
+                position: fixed;
+                top: 45px;
+                right: 0;
+                z-index: 9;
+                margin: 10px 20px;
+                color: #333;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.8);
+                text-align: center;
+                padding: 3px;
+                opacity: 1;
+                transition: 0.5s;
+            }
+
+            .outside-reset.hide {
+                opacity: 0;
+            }
+
+            /* 記分板 */
+            .calc-wrap {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .scores-wrap {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .card {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+            }
+
+            .team-name {
+                font-size: 30px;
+                color: #fff;
+            }
+
+            .score-card {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px;
+                padding: 10px 0;
+            }
+
+            .score-card.red {
+                background-color: #cd2424;
+            }
+            .score-card.blue {
+                background-color: #244ecd;
+            }
+            .score {
+                font-size: 220px;
+                font-weight: bold;
+                line-height: 220px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                border-radius: 20px;
+            }
+
+            .minus-btn {
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.3);
+                color: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                font-size: 50px;
+                line-height: 30px;
+                padding-bottom: 5px;
+                font-family: "Concert One", cursive;
+                text-align: center;
+            }
+
+            /* 手機橫式 */
+            @media screen and (min-width: 768px) {
+                .scores-wrap {
+                    flex-direction: row;
+                }
+
+                body {
+                    max-width: 100%;
+                }
+
+                .nav-inner-wrap {
+                    display: flex;
+                    gap: 100px;
+                    justify-content: center;
+                    align-items: flex-start;
+                }
+
+                .input-wrap {
+                    padding: 0;
+                }
+
+                .open-nav {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                }
+
+                .score {
+                    font-size: 420px;
+                    line-height: 420px;
+                }
+
+                .team-name {
+                    font-size: 60px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <button class="btn outside-reset" onclick="resetScore();">
+                Reset
+            </button>
+            <div class="nav-wrap">
+                <div class="open-nav">
+                    <div class="nav-list">
+                        <h1>Score Calculator</h1>
+                        <div class="nav-inner-wrap">
+                            <div class="info-wrap">
+                                <div class="info-text">
+                                    <h4>How to use:</h4>
+                                    <p>
+                                        1. Tap/click the score to add ONE point
+                                    </p>
+                                    <p>
+                                        2. Click minus button to subtract point
+                                    </p>
+                                </div>
+                                <button
+                                    class="resetBtn btn"
+                                    onclick="resetScore(); navToggle();"
+                                >
+                                    重置比數 Reset
+                                </button>
+                            </div>
+                            <div class="setting-wrap">
+                                <div class="input-wrap">
+                                    <h3>設定隊名 Set Team's Name</h3>
+                                    <div>
+                                        <label for="redTeamName"
+                                            >Name of Team A:
+                                        </label>
+                                        <input
+                                            id="redName"
+                                            type="text"
+                                            class="setName"
+                                            name="redTeamName"
+                                            placeholder="Team A"
+                                            value=""
+                                        />
+                                    </div>
+                                    <div>
+                                        <label for="blueTeamName"
+                                            >Name of Team B:
+                                        </label>
+                                        <input
+                                            id="blueName"
+                                            type="text"
+                                            class="setName"
+                                            name="blueTeamName"
+                                            placeholder="Team B"
+                                            value=""
+                                        />
+                                    </div>
+                                    <div class="btn-wrap">
+                                        <button
+                                            class="setNameBtn btn"
+                                            onclick="setName()"
+                                        >
+                                            送出隊名<br />Submit
+                                        </button>
+                                        <button
+                                            class="resetNameBtn btn"
+                                            onclick="resetName();"
+                                        >
+                                            重設隊名<br />Reset
+                                        </button>
+                                        <button
+                                            class="startBtn btn"
+                                            onclick="navToggle()"
+                                        >
+                                            直接開始<br />Skip
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="copy">copyright &copy; chuanmin</p>
                 </div>
-            </div> -->
-        </div>
-        <div class="calc-wrap">
-            <div class="scores-wrap">
-                <div class="red-wrap card">
-                    <!-- <div class="red-btn btn-wrap">
-                        <div class="red-add btn"><span> &lt;</span></div>
-                        <div class="red-sub btn"><span> &gt;</span></div>
-                    </div> -->
-                    <div class="red-score score-card" data-color="red">0</div>
-                </div>
-                <div class="blue-wrap card">
-                    <div class="blue-score score-card" data-color="blue">10</div>
-                    <!-- <div class="blue-btn btn-wrap">
-                        <div class="blue-add btn"><span> &lt;</span></div>
-                        <div class="blue-sub btn"><span> &gt;</span></div>
-                    </div> -->
+            </div>
+
+            <div class="calc-wrap">
+                <div class="scores-wrap">
+                    <div class="red-wrap card">
+                        <button id="redMinus" class="minus-btn">-</button>
+                        <div id="redTeam" class="red score-card">
+                            <div id="aName" class="team-name">Team A</div>
+                            <div class="red-score score" data-color="red">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blue-wrap card">
+                        <button id="blueMinus" class="minus-btn">-</button>
+                        <div id="blueTeam" class="blue score-card">
+                            <div id="bName" class="team-name">Team B</div>
+                            <div class="blue-score score" data-color="blue">
+                                0
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
+        <script>
+            // 分數計算
+            const redTeam = document.querySelector("#redTeam");
+            const blueTeam = document.querySelector("#blueTeam");
+            const redScore = document.querySelector(".red-score");
+            const blueScore = document.querySelector(".blue-score");
+            const redMinus = document.querySelector("#redMinus");
+            const blueMinus = document.querySelector("#blueMinus");
 
+            let red = 0;
+            let blue = 0;
+            let team = "";
 
-    <script>
-        const redScore = document.querySelector('.red-score');
-        const blueScore = document.querySelector('.blue-score');
+            const addScore = (event) => {
+                // console.log(event.currentTarget.id);
+                team = event.currentTarget.id;
+                if (team == "redTeam") {
+                    red++;
+                    redScore.innerText = red;
+                    team = "";
+                }
 
-        const redAdd = document.querySelector('.red-add');
-        const redSub = document.querySelector('.red-sub');
-        const blueAdd = document.querySelector('.blue-add');
-        const blueSub = document.querySelector('.blue-sub');
+                if (team == "blueTeam") {
+                    blue++;
+                    blueScore.innerText = blue;
+                    team = "";
+                }
+            };
 
-        let red = 0;
-        let blue = 0;
+            const subScore = (event) => {
+                team = event.currentTarget.id;
+                // console.log(team);
+                if (team == "redMinus" && red > 0) {
+                    red--;
+                    redScore.innerText = red;
+                    team = "";
+                }
 
-        const addScore = (this) => {
-            console.log(this);
-        }
+                if (team == "blueMinus" && blue > 0) {
+                    blue--;
+                    blueScore.innerText = blue;
+                    team = "";
+                }
+            };
 
-        redScore.addEventListener('click', addScore()
-        // ()=>{
-        //     // red++;
-        //     // // console.log(red);
-        //     // redScore.innerText = red;
-        // }
-        )
-    </script>
-</body>
+            redTeam.addEventListener("click", addScore);
+            blueTeam.addEventListener("click", addScore);
+            redMinus.addEventListener("click", subScore);
+            blueMinus.addEventListener("click", subScore);
+
+            // 重置比數
+            const resetScore = () => {
+                red = blue = 0;
+                redScore.innerText = blueScore.innerText = 0;
+            };
+
+            // nav-bar & hamburger animation
+            const hamburger = document.querySelector(".hamburger");
+            const navWrap = document.querySelector(".nav-wrap");
+            const outsideReset = document.querySelector(".outside-reset");
+
+            const navToggle = () => {
+                navWrap.classList.toggle("open");
+                hamburger.classList.toggle("toggle");
+                outsideReset.classList.toggle("hide");
+            };
+            hamburger.addEventListener("click", navToggle);
+
+            // 設定隊名
+            const redName = document.querySelector("#redName");
+            const blueName = document.querySelector("#blueName");
+            const aName = document.querySelector("#aName");
+            const bName = document.querySelector("#bName");
+
+            const resetName = () => {
+                aName.innerText = "Team A";
+                bName.innerText = "Team B";
+                redName.value = blueName.value = "";
+            };
+
+            const setName = () => {
+                // console.log(redName.value);
+                const teamA = redName.value;
+                const teamB = blueName.value;
+                if (teamA && teamB) {
+                    aName.innerText = teamA;
+                    bName.innerText = teamB;
+                } else {
+                    aName.innerText = "Team A";
+                    bName.innerText = "Team B";
+                }
+                navToggle();
+            };
+        </script>
+    </body>
 </html>
