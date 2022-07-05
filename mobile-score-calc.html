@@ -312,6 +312,8 @@
             .minus-wrap {
                 width: 40px;
                 height: 40px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.3);
                 position: absolute;
                 left: 10px;
                 bottom: 10px;
@@ -319,9 +321,8 @@
             }
             .minus-btn {
                 border: none;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.3);
                 color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(255, 255, 255, 0);
                 font-size: 50px;
                 line-height: 30px;
                 font-family: "Concert One", cursive;
@@ -469,7 +470,9 @@
                         </div>
                     </div>
                     <div class="blue-wrap card">
-                        <button id="blueMinus" class="minus-btn">-</button>
+                        <div class="minus-wrap">
+                            <button id="blueMinus" class="minus-btn">-</button>
+                        </div>
                         <div id="blueTeam" class="blue score-card">
                             <div id="bName" class="team-name">Team B</div>
                             <div class="blue-score score" data-color="blue">
