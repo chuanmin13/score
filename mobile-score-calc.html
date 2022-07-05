@@ -309,6 +309,11 @@
                 border-radius: 20px;
             }
 
+            .minus-wrap {
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+            }
             .minus-btn {
                 width: 40px;
                 height: 40px;
@@ -316,9 +321,6 @@
                 border-radius: 50%;
                 background-color: rgba(255, 255, 255, 0.3);
                 color: rgba(0, 0, 0, 0.5);
-                position: absolute;
-                left: 10px;
-                bottom: 10px;
                 font-size: 50px;
                 line-height: 30px;
                 font-family: "Concert One", cursive;
@@ -455,7 +457,9 @@
             <div class="calc-wrap">
                 <div class="scores-wrap">
                     <div class="red-wrap card">
-                        <button id="redMinus" class="minus-btn">-</button>
+                        <div class="minus-wrap">
+                            <button id="redMinus" class="minus-btn">-</button>
+                        </div>
                         <div id="redTeam" class="red score-card">
                             <div id="aName" class="team-name">Team A</div>
                             <div class="red-score score" data-color="red">
