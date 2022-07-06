@@ -20,7 +20,7 @@
                 box-sizing: border-box;
             }
             html {
-                height: 100vh;
+                height: 100%;
                 touch-action: manipulation;
             }
             body {
@@ -41,15 +41,15 @@
 
             /* nav-bar */
             .nav-wrap {
-                clip-path: circle(0px at 92% 38px);
+                clip-path: circle(0px at 91% 35px);
                 transition: 1s;
                 position: relative;
                 z-index: 8;
             }
 
             .nav-wrap.open {
-                clip-path: circle(1200px at 92% 38px);
-                -webkit-clip-path: circle(1200px at 92% 38px);
+                clip-path: circle(1200px at 91% 35px);
+                -webkit-clip-path: circle(1200px at 91% 35px);
                 opacity: 1;
             }
 
@@ -242,11 +242,11 @@
             }
 
             .hamburger.toggle .line1 {
-                transform: rotate(-45deg) translate(-6px, 6px);
+                transform: rotate(-45deg) translate(-7px, 7px);
                 background-color: #fff;
             }
             .hamburger.toggle .line3 {
-                transform: rotate(45deg) translate(-6px, -6px);
+                transform: rotate(45deg) translate(-7px, -7px);
                 background-color: #fff;
             }
             .hamburger.toggle .line2 {
@@ -435,7 +435,7 @@
                                             class="setName"
                                             name="redTeamName"
                                             placeholder="Team A"
-                                            value=""
+                                            value="Team B"
                                         />
                                         <input id="redClr" type="color" class="setClr" value="#cd2424">
                                     </div>
@@ -449,7 +449,7 @@
                                             class="setName"
                                             name="blueTeamName"
                                             placeholder="Team B"
-                                            value=""
+                                            value="Team B"
                                         />
                                         <input id="blueClr" type="color" class="setClr" value="#244ecd">
                                     </div>
@@ -609,8 +609,8 @@
 
 
             const resetName = () => {
-                aName.innerText = "Team A";
-                bName.innerText = "Team B";
+                aName.innerText = redName.value = "Team A";
+                bName.innerText = blueName.value = "Team B";
                 redName.value = blueName.value = "";
                 aClr.style.backgroundColor = '#cd2424';
                 bClr.style.backgroundColor = '#244ecd';
@@ -620,13 +620,9 @@
                 // console.log(redName.value);
                 const teamA = redName.value;
                 const teamB = blueName.value;
-                if (teamA && teamB) {
-                    aName.innerText = teamA;
-                    bName.innerText = teamB;
-                } else {
-                    aName.innerText = "Team A";
-                    bName.innerText = "Team B";
-                }
+                aName.innerText = "Team A";
+                bName.innerText = "Team B";
+
 
                 const clrA = redClr.value;
                 const clrB = blueClr.value;
