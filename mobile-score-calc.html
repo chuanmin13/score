@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-        <title>Score Calculator</title>
+        <title>Score Counter</title>
 
         <!-- google-font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,12 +15,17 @@
             rel="stylesheet"
         />
 
+        <!-- icon -->
+        <link rel="shortcut icon" href="./scoreCalc.svg" type="image/x-icon">
+        <link rel="apple-touch-icon image_src" href="./scoreCalc.svg" type="image/x-icon">
+
         <style>
             * {
                 box-sizing: border-box;
             }
             html {
                 height: 100%;
+                width: 100%;
                 touch-action: manipulation;
             }
             body {
@@ -41,15 +46,15 @@
 
             /* nav-bar */
             .nav-wrap {
-                clip-path: circle(0px at 91% 35px);
+                clip-path: circle(0px at -35px 34px);
                 transition: 1s;
                 position: relative;
                 z-index: 8;
             }
 
             .nav-wrap.open {
-                clip-path: circle(1200px at 91% 35px);
-                -webkit-clip-path: circle(1200px at 91% 35px);
+                clip-path: circle(1200px at -35px 34px);
+                -webkit-clip-path: circle(1200px at -35px 35px);
                 opacity: 1;
             }
 
@@ -260,7 +265,7 @@
                 top: 48px;
                 right: 0;
                 z-index: 9;
-                margin: 10px 20px;
+                margin: 20px 20px;
                 color: #333;
                 border-radius: 5px;
                 background-color: rgba(255, 255, 255, 0.8);
@@ -402,7 +407,7 @@
             <div class="nav-wrap">
                 <div class="open-nav">
                     <div class="nav-list">
-                        <h1>Score Calculator</h1>
+                        <h1>Score Counter</h1>
                         <div class="nav-inner-wrap">
                             <div class="info-wrap">
                                 <div class="info-text">
@@ -435,7 +440,7 @@
                                             class="setName"
                                             name="redTeamName"
                                             placeholder="Team A"
-                                            value="Team B"
+                                            value=""
                                         />
                                         <input id="redClr" type="color" class="setClr" value="#cd2424">
                                     </div>
@@ -449,7 +454,7 @@
                                             class="setName"
                                             name="blueTeamName"
                                             placeholder="Team B"
-                                            value="Team B"
+                                            value=""
                                         />
                                         <input id="blueClr" type="color" class="setClr" value="#244ecd">
                                     </div>
@@ -459,13 +464,13 @@
                                         class="setNameBtn btn"
                                         onclick="setName()"
                                     >
-                                        送出隊名<br />Submit
+                                        設定隊伍<br />Submit
                                     </button>
                                     <button
                                         class="resetNameBtn btn"
                                         onclick="resetName();"
                                     >
-                                        重設隊名<br />Reset
+                                        重設隊伍<br />Reset
                                     </button>
                                     <button
                                         class="startBtn btn"
@@ -579,24 +584,6 @@
             redMinus.addEventListener("click", subScore);
             blueMinus.addEventListener("click", subScore);
 
-            // 重置比數
-            const resetScore = () => {
-                red = blue = 0;
-                redScore.innerText = blueScore.innerText = 0;
-            };
-
-            // nav-bar & hamburger animation
-            const hamburger = document.querySelector(".hamburger");
-            const navWrap = document.querySelector(".nav-wrap");
-            const outsideReset = document.querySelector(".outside-reset");
-
-            const navToggle = () => {
-                navWrap.classList.toggle("open");
-                hamburger.classList.toggle("toggle");
-                outsideReset.classList.toggle("hide");
-            };
-            hamburger.addEventListener("click", navToggle);
-
             // 設定隊名及顏色
             const redName = document.querySelector("#redName");
             const blueName = document.querySelector("#blueName");
@@ -620,16 +607,46 @@
                 // console.log(redName.value);
                 const teamA = redName.value;
                 const teamB = blueName.value;
-                aName.innerText = "Team A";
-                bName.innerText = "Team B";
-
+                if (!teamA){
+                    aName.innerText = "Team A";
+                    bName.innerText = teamB;
+                } else if (!teamB){
+                    aName.innerText = teamA;
+                    bName.innerText = "Team B";
+                } else {
+                    aName.innerText = teamA;
+                    bName.innerText = teamB;
+                }
 
                 const clrA = redClr.value;
                 const clrB = blueClr.value;
                 aClr.style.backgroundColor = clrA;
                 bClr.style.backgroundColor = clrB;
+
                 navToggle();
             };
+
+            // 重置比數
+            const resetScore = () => {
+                red = blue = 0;
+                redScore.innerText = blueScore.innerText = 0;
+                aClr.style.backgroundColor = '#cd2424';
+                bClr.style.backgroundColor = '#244ecd';
+            };
+
+            // nav-bar & hamburger animation
+            const hamburger = document.querySelector(".hamburger");
+            const navWrap = document.querySelector(".nav-wrap");
+            const outsideReset = document.querySelector(".outside-reset");
+
+            const navToggle = () => {
+                navWrap.classList.toggle("open");
+                hamburger.classList.toggle("toggle");
+                outsideReset.classList.toggle("hide");
+            };
+            hamburger.addEventListener("click", navToggle);
+
+           
 
         </script>
     </body>
