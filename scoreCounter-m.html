@@ -402,7 +402,7 @@
                 <div class="line3"></div>
             </div>
             <button class="btn outside-reset" onclick="resetScore();">
-                Reset<br>歸零
+                Reset<br>比數歸零
             </button>
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -429,7 +429,7 @@
                             </div>
                             <div class="setting-wrap">
                                 <div class="input-wrap">
-                                    <h3>設定隊名 Set Team's Name</h3>
+                                    <h3>設定隊伍 Set Teams</h3>
                                     <div class="input-row">
                                         <!-- <label for="redTeamName"
                                             >Name of Team A:
@@ -468,13 +468,13 @@
                                     </button>
                                     <button
                                         class="resetNameBtn btn"
-                                        onclick="resetName();"
+                                        onclick="resetName(); resetColor();"
                                     >
                                         重設隊伍<br />Reset
                                     </button>
                                     <button
                                         class="startBtn btn"
-                                        onclick="navToggle(); resetScore();"
+                                        onclick="navToggle(); resetScore(); resetColor();"
                                     >
                                         直接開始新局<br />Skip
                                     </button>
@@ -633,8 +633,12 @@
             const resetScore = () => {
                 red = blue = 0;
                 redScore.innerText = blueScore.innerText = 0;
-                aClr.style.backgroundColor = '#cd2424';
-                bClr.style.backgroundColor = '#244ecd';
+            };
+
+            // 重置顏色
+            const resetColor = () => {
+                aClr.style.backgroundColor = redName.value ='#cd2424';
+                bClr.style.backgroundColor = blueName.value ='#244ecd';
             };
 
             // nav-bar & hamburger animation
