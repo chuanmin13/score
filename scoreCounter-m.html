@@ -483,7 +483,7 @@
                                     </button>
                                     <button
                                         class="startBtn btn"
-                                        onclick="navToggle(); resetScore(); resetColor();"
+                                        onclick="navToggle(); resetScore(); resetColor(); resetName();"
                                     >
                                         直接開始新局<br />Skip
                                     </button>
@@ -555,6 +555,9 @@
             let red = 0;
             let blue = 0;
             let team = "";
+
+            // 分數超過20變色?
+
 
             const addScore = (event) => {
                 // console.log(event.currentTarget.id);
