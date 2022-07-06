@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+        <title>Score Counter</title>
+
+        <!-- google-font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Concert+One&family=Arima&family=Kosugi+Maru&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- icon -->
+        <link rel="shortcut icon" href="./scoreCalc-icon.svg" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="128x128"  href="./scoreCalc.png">
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            html {
+                height: 100%;
+                width: 100%;
+                touch-action: manipulation;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+                height: 100%;
+                width: 100%;
+                max-width: 768px;
+                touch-action: manipulation;
+            }
+
+            /* 手機直式 */
+            .container {
+                width: 100%;
+                height: 100%;
+            }
+
+            /* nav-bar */
+            .nav-wrap {
+                clip-path: circle(0px at 89% 32px);
+                transition: 1s;
+                position: relative;
+                z-index: 8;
+            }
+
+            .nav-wrap.open {
+                clip-path: circle(1200px at 89% 32px);
+                -webkit-clip-path: circle(1200px at 89% 32px);
+                opacity: 1;
+            }
+
+            .open-nav {
+                height: 100%;
+                width: 100%;
+                border-radius: 10px;
+                background-image: linear-gradient(
+                    135deg,
+                    #feb692 10%,
+                    #ea5455 100%
+                );
+                position: fixed;
+                padding: 10 10px;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+                z-index: 8;
+            }
+
+            .nav-inner-wrap {
+                padding: 0 5vw;
+            }
+
+            .nav-list {
+                padding: 10 10px;
+            }
+            .open-nav h1 {
+                text-align: center;
+                font-size: 34px;
+                line-height: 45px;
+            }
+            .open-nav p,
+            .open-nav h4 {
+                font-size: 16px;
+                margin: 0;
+                line-height: 22px;
+            }
+
+            p.copy {
+                text-align: center;
+                font-size: 12px;
+                font-family: "Arima", cursive;
+                color: rgba(255, 255, 255, 0.6);
+                padding: 20px 0 10px;
+            }
+
+            .info-wrap {
+                padding: 0 20px 30px;
+                border-bottom: 3px dotted rgba(255, 255, 255, 0.7);
+            }
+
+            .setting-wrap {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-top: 10px;
+            }
+
+            .input-row {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .btn-wrap {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 2px;
+            }
+
+            .btn {
+                border: none;
+                border-radius: 10px;
+                color: #fff;
+                opacity: 1;
+                transition: 0.3s;
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+            }
+            .btn:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+
+            .resetBtn {
+                background-color: #333;
+                /* background-image: linear-gradient(
+                    to right,
+                    #a03a79 0%,
+                    #39407d 100%
+                ); */
+                font-size: 18px;
+                padding: 20px;
+            }
+
+            .input-wrap {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                padding: 10px 0;
+            }
+
+            .input-wrap h3 {
+                font-family: "Concert One", "Kosugi Maru", sans-serif, cursive;
+                margin: 0;
+                padding-bottom: 3px;
+                border-bottom: 3px dotted #222;
+            }
+
+            input.setName {
+                border: none;
+                border-radius: 10px;
+                padding: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+            }
+            input:focus {
+                border: 2px solid #7474bf;
+            }
+
+            .setClr {
+                border: none;
+                border-radius: 5px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .setNameBtn {
+                background-color: rgb(55, 103, 80);
+                /* background-image: linear-gradient(
+                    to right,
+                    #4b6087 0%,
+                    #314d81 100%
+                ); */
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .resetNameBtn {
+                background-color: rgb(128, 44, 89);
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .startBtn {
+                background-color: rgb(36, 71, 99);
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            /* hamburger */
+            .hamburger {
+                width: 45px;
+                height: 45px;
+                position: fixed;
+                top: 0;
+                right: 0;
+                z-index: 99;
+                margin: 10px 20px;
+                /* background-color: #fff; */
+            }
+            .line1,
+            .line2,
+            .line3 {
+                width: 100%;
+                height: 6px;
+                border-radius: 6px;
+                /* background-color: rgb(202, 65, 103); */
+                /* background-color: #222; */
+                background-color: rgba(255, 255, 255, 0.7);
+                position: absolute;
+            }
+            .line1 {
+                top: 8px;
+                transition: 0.5s;
+            }
+
+            .line2 {
+                top: 18px;
+                transition: 0.7s ease;
+            }
+
+            .line3 {
+                top: 28px;
+                transition: 0.5s;
+            }
+
+            .hamburger.toggle .line1 {
+                transform: rotate(-45deg) translate(-7px, 7px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line3 {
+                transform: rotate(45deg) translate(-7px, -7px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line2 {
+                width: 0;
+                background-color: #fff;
+            }
+
+            .outside-reset {
+                width: 45px;
+                position: fixed;
+                top: 48px;
+                right: 0;
+                z-index: 9;
+                margin: 20px 20px;
+                color: #333;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.8);
+                text-align: center;
+                padding: 3px;
+                opacity: 1;
+                transition: 0.5s;
+            }
+
+            .outside-reset.hide {
+                opacity: 0;
+            }
+
+            /* 記分板 */
+            .calc-wrap {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .scores-wrap {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .card {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+            }
+
+            .team-name {
+                /* font-size: 30px; */
+                font-size: 5vh;
+                color: #fff;
+                padding-bottom: 15px;
+            }
+
+            .score-card {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px;
+            }
+
+            /* #redTeam */
+            .score-card.red {
+                background-color: #cd2424;
+            }
+            /* #blueTeam */
+            .score-card.blue {
+                background-color: #244ecd;
+            }
+            .score {
+                font-size: 35vh;
+                font-weight: bold;
+                line-height: 30vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                border-radius: 20px;
+            }
+
+            .minus-wrap {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+            }
+
+            /* 手機橫式 */
+            @media screen and (min-width: 576px) {
+                .scores-wrap {
+                    flex-direction: row;
+                }
+
+                body {
+                    max-width: 100%;
+                }
+
+                .nav-inner-wrap {
+                    display: flex;
+                    gap: 100px;
+                    justify-content: center;
+                    align-items: flex-start;
+                }
+
+                .input-wrap {
+                    padding: 0;
+                }
+
+                /* .open-nav {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                } */
+
+                .score {
+                    font-size: 40vw;
+                    line-height: 35vw;
+                }
+
+                .team-name {
+                    font-size: 8vw;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: none;">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 310.285 310.285" style="enable-background:new 0 0 310.285 310.285;" xml:space="preserve"><path d="M155.143,0.001C69.597,0.001,0,69.597,0,155.143c0,85.545,69.597,155.142,155.143,155.142s155.143-69.597,155.143-155.142C310.285,69.597,240.689,0.001,155.143,0.001z M244.143,171.498c0,4.411-3.589,8-8,8h-163c-4.411,0-8-3.589-8-8v-32c0-4.411,3.589-8,8-8h163c4.411,0,8,3.589,8,8V171.498z"/></svg>
+        </div>
+
+        <div class="container">
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <button class="btn outside-reset" onclick="resetScore();">
+                Reset<br>歸零
+            </button>
+            <div class="nav-wrap">
+                <div class="open-nav">
+                    <div class="nav-list">
+                        <h1>Score Counter</h1>
+                        <div class="nav-inner-wrap">
+                            <div class="info-wrap">
+                                <div class="info-text">
+                                    <h4>How to use:</h4>
+                                    <p>
+                                        1. Tap/click the score to add ONE point
+                                    </p>
+                                    <p>
+                                        2. Click minus button to subtract point
+                                    </p>
+                                </div>
+                                
+                                <!-- <button
+                                    class="resetBtn btn"
+                                    onclick="resetScore(); navToggle();"
+                                >
+                                    重置比數 Reset
+                                </button> -->
+                            </div>
+                            <div class="setting-wrap">
+                                <div class="input-wrap">
+                                    <h3>設定隊名 Set Team's Name</h3>
+                                    <div class="input-row">
+                                        <!-- <label for="redTeamName"
+                                            >Name of Team A:
+                                        </label> -->
+                                        <input
+                                            id="redName"
+                                            type="text"
+                                            class="setName"
+                                            name="redTeamName"
+                                            placeholder="Team A"
+                                            value=""
+                                        />
+                                        <input id="redClr" type="color" class="setClr" value="#cd2424">
+                                    </div>
+                                    <div class="input-row">
+                                        <!-- <label for="blueTeamName"
+                                            >Name of Team B:
+                                        </label> -->
+                                        <input
+                                            id="blueName"
+                                            type="text"
+                                            class="setName"
+                                            name="blueTeamName"
+                                            placeholder="Team B"
+                                            value=""
+                                        />
+                                        <input id="blueClr" type="color" class="setClr" value="#244ecd">
+                                    </div>
+                                </div>
+                                <div class="btn-wrap">
+                                    <button
+                                        class="setNameBtn btn"
+                                        onclick="setName()"
+                                    >
+                                        設定隊伍<br />Submit
+                                    </button>
+                                    <button
+                                        class="resetNameBtn btn"
+                                        onclick="resetName();"
+                                    >
+                                        重設隊伍<br />Reset
+                                    </button>
+                                    <button
+                                        class="startBtn btn"
+                                        onclick="navToggle(); resetScore();"
+                                    >
+                                        直接開始新局<br />Skip
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="copy">copyright &copy; chuanmin</p>
+                </div>
+            </div>
+
+            <div class="calc-wrap">
+                <div class="scores-wrap">
+                    <div class="red-wrap card">
+                        <div id="redMinus" class="minus-wrap">
+                            <svg width="100%" height="100%" fill="currentColor" class="icon-svg" style="fill: rgba(255, 255, 255, 0.6); display: inline-block;"><use xlink:href="#Capa_1"></use></svg>
+                            <!-- <button id="redMinus" class="minus-btn">-</button> -->
+                        </div>
+                        <div id="redTeam" class="red score-card">
+                            <div id="aName" class="team-name">Team A</div>
+                            <div class="red-score score" data-color="red">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blue-wrap card">
+                        <div id="blueMinus" class="minus-wrap">
+                            <svg width="100%" height="100%" fill="currentColor" class="icon-svg" style="fill: rgba(255, 255, 255, 0.6); display: inline-block;"><use xlink:href="#Capa_1"></use></svg>
+                        </div>
+                        <div id="blueTeam" class="blue score-card">
+                            <div id="bName" class="team-name">Team B</div>
+                            <div class="blue-score score" data-color="blue">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // safari手機網頁 prevent double tap scale
+            window.onload = () => {
+                document.addEventListener('touchstart', (event) => {
+                    if(event.touches.length > 1){
+                        event.preventDefault();
+                    }
+                }, { passive: false});
+
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', (event) => {
+                    const now = new (Date()).getTime();
+                    if ( now - lastTouchEnd <= 300) {
+                        event.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+            }
+
+
+            // 分數計算
+            const redTeam = document.querySelector("#redTeam");
+            const blueTeam = document.querySelector("#blueTeam");
+            const redScore = document.querySelector(".red-score");
+            const blueScore = document.querySelector(".blue-score");
+            const redMinus = document.querySelector("#redMinus");
+            const blueMinus = document.querySelector("#blueMinus");
+
+            let red = 0;
+            let blue = 0;
+            let team = "";
+
+            const addScore = (event) => {
+                // console.log(event.currentTarget.id);
+                team = event.currentTarget.id;
+                if (team == "redTeam") {
+                    red++;
+                    redScore.innerText = red;
+                    team = "";
+                }
+
+                if (team == "blueTeam") {
+                    blue++;
+                    blueScore.innerText = blue;
+                    team = "";
+                }
+            };
+
+            const subScore = (event) => {
+                team = event.currentTarget.id;
+                // console.log(team);
+                if (team == "redMinus" && red > 0) {
+                    red--;
+                    redScore.innerText = red;
+                    team = "";
+                }
+
+                if (team == "blueMinus" && blue > 0) {
+                    blue--;
+                    blueScore.innerText = blue;
+                    team = "";
+                }
+            };
+
+            redTeam.addEventListener("click", addScore);
+            blueTeam.addEventListener("click", addScore);
+            redMinus.addEventListener("click", subScore);
+            blueMinus.addEventListener("click", subScore);
+
+            // 設定隊名及顏色
+            const redName = document.querySelector("#redName");
+            const blueName = document.querySelector("#blueName");
+            const aName = document.querySelector("#aName");
+            const bName = document.querySelector("#bName");
+            const redClr = document.querySelector('#redClr');
+            const blueClr = document.querySelector('#blueClr');
+            const aClr = document.querySelector('#redTeam');
+            const bClr = document.querySelector('#blueTeam');
+
+
+            const resetName = () => {
+                aName.innerText = redName.value = "Team A";
+                bName.innerText = blueName.value = "Team B";
+                redName.value = blueName.value = "";
+                aClr.style.backgroundColor = '#cd2424';
+                bClr.style.backgroundColor = '#244ecd';
+            };
+
+            const setName = () => {
+                // console.log(redName.value);
+                const teamA = redName.value;
+                const teamB = blueName.value;
+                if(teamA && teamB){
+                    aName.innerText = teamA;
+                    bName.innerText = teamB;
+                } else if (!teamA && teamB){
+                    aName.innerText = "Team A";
+                    bName.innerText = teamB;
+                } else if (!teamB && teamA){
+                    aName.innerText = teamA;
+                    bName.innerText = "Team B";
+                } else {
+                    aName.innerText = "Team A";
+                    bName.innerText = "Team B";
+                }
+
+                const clrA = redClr.value;
+                const clrB = blueClr.value;
+                aClr.style.backgroundColor = clrA;
+                bClr.style.backgroundColor = clrB;
+
+                navToggle();
+            };
+
+            // 重置比數
+            const resetScore = () => {
+                red = blue = 0;
+                redScore.innerText = blueScore.innerText = 0;
+                aClr.style.backgroundColor = '#cd2424';
+                bClr.style.backgroundColor = '#244ecd';
+            };
+
+            // nav-bar & hamburger animation
+            const hamburger = document.querySelector(".hamburger");
+            const navWrap = document.querySelector(".nav-wrap");
+            const outsideReset = document.querySelector(".outside-reset");
+
+            const navToggle = () => {
+                navWrap.classList.toggle("open");
+                hamburger.classList.toggle("toggle");
+                outsideReset.classList.toggle("hide");
+            };
+            hamburger.addEventListener("click", navToggle);
+
+           
+
+        </script>
+    </body>
+</html>
