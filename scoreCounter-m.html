@@ -273,11 +273,9 @@
                 padding: 3px;
                 opacity: 1;
                 transition: 0.5s;
+                font-size: 12px;
             }
 
-            .outside-reset.hide {
-                opacity: 0;
-            }
 
             /* 記分板 */
             .calc-wrap {
@@ -402,7 +400,7 @@
                 <div class="line3"></div>
             </div>
             <button class="btn outside-reset" onclick="resetScore();">
-                Reset<br>比數歸零
+                Reset<br>比數<br>歸零
             </button>
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -637,8 +635,8 @@
 
             // 重置顏色
             const resetColor = () => {
-                aClr.style.backgroundColor = redName.value ='#cd2424';
-                bClr.style.backgroundColor = blueName.value ='#244ecd';
+                aClr.style.backgroundColor = redClr.value ='#cd2424';
+                bClr.style.backgroundColor = blueClr.value ='#244ecd';
             };
 
             // nav-bar & hamburger animation
