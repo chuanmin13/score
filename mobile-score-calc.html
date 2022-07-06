@@ -46,15 +46,15 @@
 
             /* nav-bar */
             .nav-wrap {
-                clip-path: circle(0px at 90% 33px);
+                clip-path: circle(0px at 89% 32px);
                 transition: 1s;
                 position: relative;
                 z-index: 8;
             }
 
             .nav-wrap.open {
-                clip-path: circle(1200px at 90% 33px);
-                -webkit-clip-path: circle(1200px at 90% 33px);
+                clip-path: circle(1200px at 89% 32px);
+                -webkit-clip-path: circle(1200px at 89% 32px);
                 opacity: 1;
             }
 
@@ -402,7 +402,7 @@
                 <div class="line3"></div>
             </div>
             <button class="btn outside-reset" onclick="resetScore();">
-                Reset
+                Reset<br>歸零
             </button>
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -607,15 +607,18 @@
                 // console.log(redName.value);
                 const teamA = redName.value;
                 const teamB = blueName.value;
-                if (!teamA){
+                if(teamA && teamB){
+                    aName.innerText = teamA;
+                    bName.innerText = teamB;
+                } else if (!teamA && teamB){
                     aName.innerText = "Team A";
                     bName.innerText = teamB;
-                } else if (!teamB){
+                } else if (!teamB && teamA){
                     aName.innerText = teamA;
                     bName.innerText = "Team B";
                 } else {
-                    aName.innerText = teamA;
-                    bName.innerText = teamB;
+                    aName.innerText = "Team A";
+                    bName.innerText = "Team B";
                 }
 
                 const clrA = redClr.value;
