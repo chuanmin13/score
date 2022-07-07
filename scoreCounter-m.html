@@ -103,8 +103,36 @@
             }
 
             .info-wrap {
-                padding: 0 20px 30px;
+                padding: 0 20px 20px;
                 border-bottom: 3px dotted rgba(255, 255, 255, 0.7);
+            }
+
+            .info-text {
+                padding-bottom: 15px;
+            }
+
+            .record-wrap {
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+                padding-top: 15px;
+                border-top: 2px dotted rgba(255, 255, 255, 0.5);
+            }
+            .record-wrap h5 {
+                margin: 5px;
+                font-size: 16px;
+            }
+            .record-wrap p {
+                margin: 5px;
+                font-size: 18px;
+            }
+
+            button.delRecord {
+                color: #333;
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+            .delRecord:hover {
+                opacity: 0.4;
             }
 
             .setting-wrap {
@@ -277,11 +305,9 @@
                 background-color: #fff;
             }
 
-            .outside-reset {
+            .outside-btn {
                 width: 45px;
                 position: fixed;
-                top: 48px;
-                right: 0;
                 z-index: 9;
                 margin: 20px 20px;
                 color: #333;
@@ -294,7 +320,18 @@
                 font-size: 12px;
             }
 
-            .outside-reset.hide {
+            .outside-reset {
+                top: 48px;
+                right: 0;
+            }
+
+            .record-game {
+                bottom: 0px;
+                right: 0;
+            }
+
+            .outside-reset.hide,
+            .record-game.hide {
                 opacity: 0;
             }
 
@@ -442,8 +479,14 @@
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
-            <button class="btn outside-reset" onclick="resetScore();">
+            <button
+                class="btn outside-reset outside-btn"
+                onclick="resetScore();"
+            >
                 Reset<br />比數<br />歸零
+            </button>
+            <button class="btn record-game outside-btn" onclick="recordGame();">
+                Save<br />紀録<br />比分
             </button>
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -461,6 +504,58 @@
                                     </p>
                                 </div>
 
+                                <div class="record-wrap">
+                                    <div class="record-card r1">
+                                        <button
+                                            class="delRecord btn"
+                                            onclick="delRecords(i)"
+                                        >
+                                            X
+                                        </button>
+                                        <h5>Game 1</h5>
+                                        <p>xx:xx</p>
+                                    </div>
+                                    <div class="record-card">
+                                        <button
+                                            class="delRecord btn"
+                                            onclick="delRecords(i)"
+                                        >
+                                            X
+                                        </button>
+                                        <h5>Game 2</h5>
+                                        <p>xx:xx</p>
+                                    </div>
+                                    <div class="record-card">
+                                        <button
+                                            class="delRecord btn"
+                                            onclick="delRecords(i)"
+                                        >
+                                            X
+                                        </button>
+                                        <h5>Game 3</h5>
+                                        <p>xx:xx</p>
+                                    </div>
+                                    <div class="record-card">
+                                        <button
+                                            class="delRecord btn"
+                                            onclick="delRecords(i)"
+                                        >
+                                            X
+                                        </button>
+                                        <h5>Game 4</h5>
+                                        <p>xx:xx</p>
+                                    </div>
+                                    <div class="record-card">
+                                        <button
+                                            class="delRecord btn"
+                                            onclick="delRecords(i)"
+                                        >
+                                            X
+                                        </button>
+                                        <h5>Game 5</h5>
+                                        <p>xx:xx</p>
+                                    </div>
+                                </div>
                                 <!-- <button
                                     class="resetBtn btn"
                                     onclick="resetScore(); navToggle();"
@@ -642,10 +737,12 @@
             let red = 0;
             let blue = 0;
             let team = "";
+            let game = 1;
 
             // 目前比數存到session, 重整網頁保留比數
-            let nowScore = { red: 0, blue: 0 };
+            let nowScore = { game: game, red: 0, blue: 0 };
             let data = {};
+            let records = [];
 
             const setScoreSession = (t) => {
                 if (t === "r") {
@@ -708,13 +805,16 @@
             blueMinus.addEventListener("click", subScore);
 
             // 如果session有資料, 設定比數
-            if (sessionStorage.getItem("nowScore")) {
-                data = sessionStorage.getItem("nowScore");
-                // console.log("get session", data);
-                const d = JSON.parse(data);
-                redScore.innerText = red = d.red;
-                blueScore.innerText = blue = d.blue;
-            }
+            const checkSession = () => {
+                if (sessionStorage.getItem("nowScore")) {
+                    data = sessionStorage.getItem("nowScore");
+                    // console.log("get session", data);
+                    const d = JSON.parse(data);
+                    redScore.innerText = red = d.red;
+                    blueScore.innerText = blue = d.blue;
+                }
+            };
+            checkSession();
 
             // 設定隊名及顏色
             const redName = document.querySelector("#redName");
@@ -775,17 +875,48 @@
                 bClr.style.backgroundColor = blueClr.value = "#244ecd";
             };
 
-            // nav-bar & hamburger animation
+            // 開合選單 nav-bar & hamburger animation
             const hamburger = document.querySelector(".hamburger");
             const navWrap = document.querySelector(".nav-wrap");
             const outsideReset = document.querySelector(".outside-reset");
+            const recordGameBtn = document.querySelector(".record-game");
 
             const navToggle = () => {
                 navWrap.classList.toggle("open");
                 hamburger.classList.toggle("toggle");
                 outsideReset.classList.toggle("hide");
+                recordGameBtn.classList.toggle("hide");
             };
             hamburger.addEventListener("click", navToggle);
+
+            // 紀錄比數
+            const rCard = document.querySelectorAll(".record-card");
+            const recordGame = () => {
+                data = sessionStorage.getItem("nowScore");
+                const d = JSON.parse(data);
+                // console.log(d.game);
+                console.log(rCard[d.game - 1].children[2]);
+                const p = rCard[d.game - 1].children[2];
+                p.innerText = `${d.red} : ${d.blue}`;
+
+                // records 存到 session
+                records.push(data);
+                sessionStorage.setItem("records", records);
+            };
+            // 刪除紀錄
+            const delRecords = (i) => {};
+
+            // 如果session 有 records
+            const renderRecords = () => {
+                if (sessionStorage.getItem("records")) {
+                    records = sessionStorage.getItem("records");
+                    // console.log("get session", records);
+                    const r = JSON.parse(records);
+                    records.map(function () {
+                        // 跑迴圈recordGame
+                    });
+                }
+            };
         </script>
     </body>
 </html>
