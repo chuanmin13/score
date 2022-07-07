@@ -358,6 +358,7 @@
                 position: absolute;
                 left: 10px;
                 bottom: 10px;
+                z-index: 10;
             }
 
             /* 手機橫式 */
@@ -629,7 +630,7 @@
 
                 sessionStorage.setItem("nowScore", JSON.stringify(nowScore));
                 data = sessionStorage.getItem("nowScore");
-                console.log("set scoreSession", data);
+                // console.log("set scoreSession", data);
             };
 
             // 分數超過20變色?
@@ -682,7 +683,7 @@
             // 如果session有資料, 設定比數
             if (sessionStorage.getItem("nowScore")) {
                 data = sessionStorage.getItem("nowScore");
-                console.log("get session", data);
+                // console.log("get session", data);
                 const d = JSON.parse(data);
                 redScore.innerText = d.red;
                 blueScore.innerText = d.blue;
