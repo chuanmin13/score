@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
 
         <title>Score Counter</title>
 
@@ -16,8 +19,12 @@
         />
 
         <!-- icon -->
-        <link rel="shortcut icon" href="./scoreCalc-icon.svg" type="image/x-icon">
-        <link rel="apple-touch-icon" sizes="128x128"  href="./scoreCalc.png">
+        <link
+            rel="shortcut icon"
+            href="./scoreCalc-icon.svg"
+            type="image/x-icon"
+        />
+        <link rel="apple-touch-icon" sizes="128x128" href="./scoreCalc.png" />
 
         <style>
             * {
@@ -280,7 +287,6 @@
                 opacity: 0;
             }
 
-
             /* 記分板 */
             .calc-wrap {
                 width: 100%;
@@ -372,10 +378,10 @@
                 }
 
                 .info-wrap {
-                    flex-grow: 1;
+                    flex-grow: 0;
                 }
                 .setting-wrap {
-                    flex-grow: 2;
+                    flex-grow: 1;
                 }
 
                 .input-wrap {
@@ -400,8 +406,22 @@
         </style>
     </head>
     <body>
-        <div style="display: none;">
-            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 310.285 310.285" style="enable-background:new 0 0 310.285 310.285;" xml:space="preserve"><path d="M155.143,0.001C69.597,0.001,0,69.597,0,155.143c0,85.545,69.597,155.142,155.143,155.142s155.143-69.597,155.143-155.142C310.285,69.597,240.689,0.001,155.143,0.001z M244.143,171.498c0,4.411-3.589,8-8,8h-163c-4.411,0-8-3.589-8-8v-32c0-4.411,3.589-8,8-8h163c4.411,0,8,3.589,8,8V171.498z"/></svg>
+        <div style="display: none">
+            <svg
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 310.285 310.285"
+                style="enable-background: new 0 0 310.285 310.285"
+                xml:space="preserve"
+            >
+                <path
+                    d="M155.143,0.001C69.597,0.001,0,69.597,0,155.143c0,85.545,69.597,155.142,155.143,155.142s155.143-69.597,155.143-155.142C310.285,69.597,240.689,0.001,155.143,0.001z M244.143,171.498c0,4.411-3.589,8-8,8h-163c-4.411,0-8-3.589-8-8v-32c0-4.411,3.589-8,8-8h163c4.411,0,8,3.589,8,8V171.498z"
+                />
+            </svg>
         </div>
 
         <div class="container">
@@ -411,7 +431,7 @@
                 <div class="line3"></div>
             </div>
             <button class="btn outside-reset" onclick="resetScore();">
-                Reset<br>比數<br>歸零
+                Reset<br />比數<br />歸零
             </button>
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -428,7 +448,7 @@
                                         2. Click minus button to subtract point
                                     </p>
                                 </div>
-                                
+
                                 <!-- <button
                                     class="resetBtn btn"
                                     onclick="resetScore(); navToggle();"
@@ -451,7 +471,12 @@
                                             placeholder="Team A"
                                             value=""
                                         />
-                                        <input id="redClr" type="color" class="setClr" value="#cd2424">
+                                        <input
+                                            id="redClr"
+                                            type="color"
+                                            class="setClr"
+                                            value="#cd2424"
+                                        />
                                     </div>
                                     <div class="input-row">
                                         <!-- <label for="blueTeamName"
@@ -465,7 +490,12 @@
                                             placeholder="Team B"
                                             value=""
                                         />
-                                        <input id="blueClr" type="color" class="setClr" value="#244ecd">
+                                        <input
+                                            id="blueClr"
+                                            type="color"
+                                            class="setClr"
+                                            value="#244ecd"
+                                        />
                                     </div>
                                 </div>
                                 <div class="btn-wrap">
@@ -499,7 +529,18 @@
                 <div class="scores-wrap">
                     <div class="red-wrap card">
                         <div id="redMinus" class="minus-wrap">
-                            <svg width="100%" height="100%" fill="currentColor" class="icon-svg" style="fill: rgba(255, 255, 255, 0.6); display: inline-block;"><use xlink:href="#Capa_1"></use></svg>
+                            <svg
+                                width="100%"
+                                height="100%"
+                                fill="currentColor"
+                                class="icon-svg"
+                                style="
+                                    fill: rgba(255, 255, 255, 0.6);
+                                    display: inline-block;
+                                "
+                            >
+                                <use xlink:href="#Capa_1"></use>
+                            </svg>
                             <!-- <button id="redMinus" class="minus-btn">-</button> -->
                         </div>
                         <div id="redTeam" class="red score-card">
@@ -511,7 +552,18 @@
                     </div>
                     <div class="blue-wrap card">
                         <div id="blueMinus" class="minus-wrap">
-                            <svg width="100%" height="100%" fill="currentColor" class="icon-svg" style="fill: rgba(255, 255, 255, 0.6); display: inline-block;"><use xlink:href="#Capa_1"></use></svg>
+                            <svg
+                                width="100%"
+                                height="100%"
+                                fill="currentColor"
+                                class="icon-svg"
+                                style="
+                                    fill: rgba(255, 255, 255, 0.6);
+                                    display: inline-block;
+                                "
+                            >
+                                <use xlink:href="#Capa_1"></use>
+                            </svg>
                         </div>
                         <div id="blueTeam" class="blue score-card">
                             <div id="bName" class="team-name">Team B</div>
@@ -527,22 +579,29 @@
         <script>
             // safari手機網頁 prevent double tap scale
             window.onload = () => {
-                document.addEventListener('touchstart', (event) => {
-                    if(event.touches.length > 1){
-                        event.preventDefault();
-                    }
-                }, { passive: false});
+                document.addEventListener(
+                    "touchstart",
+                    (event) => {
+                        if (event.touches.length > 1) {
+                            event.preventDefault();
+                        }
+                    },
+                    { passive: false }
+                );
 
                 let lastTouchEnd = 0;
-                document.addEventListener('touchend', (event) => {
-                    const now = new (Date()).getTime();
-                    if ( now - lastTouchEnd <= 300) {
-                        event.preventDefault();
-                    }
-                    lastTouchEnd = now;
-                }, false);
-            }
-
+                document.addEventListener(
+                    "touchend",
+                    (event) => {
+                        const now = new (Date().getTime)();
+                        if (now - lastTouchEnd <= 300) {
+                            event.preventDefault();
+                        }
+                        lastTouchEnd = now;
+                    },
+                    false
+                );
+            };
 
             // 分數計算
             const redTeam = document.querySelector("#redTeam");
@@ -556,8 +615,24 @@
             let blue = 0;
             let team = "";
 
-            // 分數超過20變色?
+            // 目前比數存到session, 重整網頁保留比數
+            let nowScore = { red: 0, blue: 0 };
+            let data = {};
 
+            const setScoreSession = (t) => {
+                if (t === "r") {
+                    nowScore = { ...nowScore, red: red };
+                }
+                if (t === "b") {
+                    nowScore = { ...nowScore, blue: blue };
+                }
+
+                sessionStorage.setItem("nowScore", JSON.stringify(nowScore));
+                data = sessionStorage.getItem("nowScore");
+                console.log("set scoreSession", data);
+            };
+
+            // 分數超過20變色?
 
             const addScore = (event) => {
                 // console.log(event.currentTarget.id);
@@ -566,12 +641,16 @@
                     red++;
                     redScore.innerText = red;
                     team = "";
+
+                    setScoreSession("r");
                 }
 
                 if (team == "blueTeam") {
                     blue++;
                     blueScore.innerText = blue;
                     team = "";
+
+                    setScoreSession("b");
                 }
             };
 
@@ -582,12 +661,16 @@
                     red--;
                     redScore.innerText = red;
                     team = "";
+
+                    setScoreSession("r");
                 }
 
                 if (team == "blueMinus" && blue > 0) {
                     blue--;
                     blueScore.innerText = blue;
                     team = "";
+
+                    setScoreSession("b");
                 }
             };
 
@@ -596,36 +679,44 @@
             redMinus.addEventListener("click", subScore);
             blueMinus.addEventListener("click", subScore);
 
+            // 如果session有資料, 設定比數
+            if (sessionStorage.getItem("nowScore")) {
+                data = sessionStorage.getItem("nowScore");
+                console.log("get session", data);
+                const d = JSON.parse(data);
+                redScore.innerText = d.red;
+                blueScore.innerText = d.blue;
+            }
+
             // 設定隊名及顏色
             const redName = document.querySelector("#redName");
             const blueName = document.querySelector("#blueName");
             const aName = document.querySelector("#aName");
             const bName = document.querySelector("#bName");
-            const redClr = document.querySelector('#redClr');
-            const blueClr = document.querySelector('#blueClr');
-            const aClr = document.querySelector('#redTeam');
-            const bClr = document.querySelector('#blueTeam');
-
+            const redClr = document.querySelector("#redClr");
+            const blueClr = document.querySelector("#blueClr");
+            const aClr = document.querySelector("#redTeam");
+            const bClr = document.querySelector("#blueTeam");
 
             const resetName = () => {
                 aName.innerText = redName.value = "Team A";
                 bName.innerText = blueName.value = "Team B";
                 redName.value = blueName.value = "";
-                aClr.style.backgroundColor = '#cd2424';
-                bClr.style.backgroundColor = '#244ecd';
+                aClr.style.backgroundColor = "#cd2424";
+                bClr.style.backgroundColor = "#244ecd";
             };
 
             const setName = () => {
                 // console.log(redName.value);
                 const teamA = redName.value;
                 const teamB = blueName.value;
-                if(teamA && teamB){
+                if (teamA && teamB) {
                     aName.innerText = teamA;
                     bName.innerText = teamB;
-                } else if (!teamA && teamB){
+                } else if (!teamA && teamB) {
                     aName.innerText = "Team A";
                     bName.innerText = teamB;
-                } else if (!teamB && teamA){
+                } else if (!teamB && teamA) {
                     aName.innerText = teamA;
                     bName.innerText = "Team B";
                 } else {
@@ -645,12 +736,15 @@
             const resetScore = () => {
                 red = blue = 0;
                 redScore.innerText = blueScore.innerText = 0;
+
+                // 重設 session
+                sessionStorage.removeItem("nowScore");
             };
 
             // 重置顏色
             const resetColor = () => {
-                aClr.style.backgroundColor = redClr.value ='#cd2424';
-                bClr.style.backgroundColor = blueClr.value ='#244ecd';
+                aClr.style.backgroundColor = redClr.value = "#cd2424";
+                bClr.style.backgroundColor = blueClr.value = "#244ecd";
             };
 
             // nav-bar & hamburger animation
@@ -664,9 +758,6 @@
                 outsideReset.classList.toggle("hide");
             };
             hamburger.addEventListener("click", navToggle);
-
-           
-
         </script>
     </body>
 </html>
