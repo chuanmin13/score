@@ -630,7 +630,7 @@
 
                 sessionStorage.setItem("nowScore", JSON.stringify(nowScore));
                 data = sessionStorage.getItem("nowScore");
-                // console.log("set scoreSession", data);
+                console.log("set scoreSession", data);
             };
 
             // 分數超過20變色?
@@ -685,8 +685,8 @@
                 data = sessionStorage.getItem("nowScore");
                 // console.log("get session", data);
                 const d = JSON.parse(data);
-                redScore.innerText = d.red;
-                blueScore.innerText = d.blue;
+                redScore.innerText = red = d.red;
+                blueScore.innerText = blue = d.blue;
             }
 
             // 設定隊名及顏色
