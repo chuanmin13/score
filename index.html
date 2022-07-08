@@ -669,7 +669,8 @@
         let set = 1;
 
         // 目前比數存到session, 重整網頁保留比數
-        let nowScore = { set: set, red: 0, blue: 0 };
+        // let nowScore = { set: set, red: 0, blue: 0 };
+        let nowScore = { red: 0, blue: 0 };
         let data = {};
         let records = [];
 
@@ -823,33 +824,41 @@
         const delRecordBtn = document.querySelector('.delRecord');
 
         const recordset = () => {
-            data = sessionStorage.getItem("nowScore");
-            const d = JSON.parse(data);
-            // console.log(d.set);
-            // console.log(rCard[d.set - 1].children[2]);
-            const p = rCard[d.set - 1].children[2];
-            red = d.red;
-            blue = d.blue;
-            p.innerText = `${red} : ${blue}`;
-
-            // records 存到 session
-            records.push(data);
-            sessionStorage.setItem("records", JSON.stringify(records));
-            // console.log(JSON.stringify(records));
-
-            if (set < 5) {
-                set++;
-            } else {
+            const rLength = records.length;
+            console.log(rLength);
+            if (rLength === 5) {
                 alert('紀錄已滿，請刪除後再新增');
+            } else {
+                data = sessionStorage.getItem("nowScore");
+                const d = JSON.parse(data);
+                // console.log(records.length);
+                // console.log(rCard[d.set - 1].children[2]);
+
+                red = d.red;
+                blue = d.blue;
+
+                const p = rCard[rLength].children[2];
+                p.innerText = `${red} : ${blue}`;
+
+                // records 存到 session
+                records.push(d);
+                sessionStorage.setItem("records", JSON.stringify(records));
+                console.log(JSON.stringify(records));
             }
         };
+
         // 刪除紀錄
         const delRecords = (setNum) => {
             const index = setNum - 1;
-            rCard[index].children[2].innerText = "xx:xx";
             // 單一刪的話, 後面的往前推補上?
-            for (let s = setNum; s < 5; s++) {
-                rCard[s].children[2].innerText = rCard[s + 1].children[2].innerText;
+            if (sessionStorage.getItem("records")) {
+                const r = sessionStorage.getItem("records");
+                const newR = r.filter((v, i) => {
+                    return i !== index;
+                });
+                r = newR;
+                console.log(r);
+
             }
         };
 
@@ -865,9 +874,11 @@
                     // console.log(typeof s);  // string
                     // console.log(typeof JSON.parse(s));  // object
                     s = JSON.parse(s);
-                    console.log(s.set, s.red, s.blue);
+                    console.log(i, s.red, s.blue);
                     rCard[i].children[2].innerText = `${s.red} : ${s.blue}`;
                 });
+            } else {
+
             }
         };
         // renderRecords();
