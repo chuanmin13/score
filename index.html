@@ -500,36 +500,36 @@
                             </div>
 
                             <div class="record-wrap">
-                                <div class="record-card r1">
-                                    <button class="delRecord btn" onclick="delRecords(i)">
+                                <div class="record-card">
+                                    <button class="delRecord btn" onclick="delRecords(1)">
                                         X
                                     </button>
                                     <h5>set 1</h5>
                                     <p>xx:xx</p>
                                 </div>
                                 <div class="record-card">
-                                    <button class="delRecord btn" onclick="delRecords(i)">
+                                    <button class="delRecord btn" onclick="delRecords(2)">
                                         X
                                     </button>
                                     <h5>set 2</h5>
                                     <p>xx:xx</p>
                                 </div>
                                 <div class="record-card">
-                                    <button class="delRecord btn" onclick="delRecords(i)">
+                                    <button class="delRecord btn" onclick="delRecords(3)">
                                         X
                                     </button>
                                     <h5>set 3</h5>
                                     <p>xx:xx</p>
                                 </div>
                                 <div class="record-card">
-                                    <button class="delRecord btn" onclick="delRecords(i)">
+                                    <button class="delRecord btn" onclick="delRecords(4)">
                                         X
                                     </button>
                                     <h5>set 4</h5>
                                     <p>xx:xx</p>
                                 </div>
                                 <div class="record-card">
-                                    <button class="delRecord btn" onclick="delRecords(i)">
+                                    <button class="delRecord btn" onclick="delRecords(5)">
                                         X
                                     </button>
                                     <h5>set 5</h5>
@@ -820,36 +820,57 @@
 
         // 紀錄比數
         const rCard = document.querySelectorAll(".record-card");
+        const delRecordBtn = document.querySelector('.delRecord');
+
         const recordset = () => {
             data = sessionStorage.getItem("nowScore");
             const d = JSON.parse(data);
             // console.log(d.set);
-            console.log(rCard[d.set - 1].children[2]);
+            // console.log(rCard[d.set - 1].children[2]);
             const p = rCard[d.set - 1].children[2];
-            p.innerText = `${d.red} : ${d.blue}`;
+            red = d.red;
+            blue = d.blue;
+            p.innerText = `${red} : ${blue}`;
 
             // records 存到 session
             records.push(data);
-            sessionStorage.setItem("records", records);
+            sessionStorage.setItem("records", JSON.stringify(records));
+            // console.log(JSON.stringify(records));
+
+            if (set < 5) {
+                set++;
+            } else {
+                alert('紀錄已滿，請刪除後再新增');
+            }
         };
         // 刪除紀錄
-        const delRecords = (i) => { };
+        const delRecords = (setNum) => {
+            const index = setNum - 1;
+            rCard[index].children[2].innerText = "xx:xx";
+            // 單一刪的話, 後面的往前推補上?
+            for (let s = setNum; s < 5; s++) {
+                rCard[s].children[2].innerText = rCard[s + 1].children[2].innerText;
+            }
+        };
 
-        // 如果session 有 records
+        // 如果session 有 records, 將紀錄render出來
         const renderRecords = () => {
             if (sessionStorage.getItem("records")) {
-                records = sessionStorage.getItem("records");
+                const r = sessionStorage.getItem("records");
                 // console.log("get session", records);
-                const r = JSON.parse(records);
-                records.map(function () {
+                // console.log(r);
+                rArr = JSON.parse(r);
+                rArr.forEach((s, i) => {
                     // 跑迴圈 render set records
-                    console.log(r);
-                    r.map(s, function () {
-
-                    })
+                    // console.log(typeof s);  // string
+                    // console.log(typeof JSON.parse(s));  // object
+                    s = JSON.parse(s);
+                    console.log(s.set, s.red, s.blue);
+                    rCard[i].children[2].innerText = `${s.red} : ${s.blue}`;
                 });
             }
         };
+        // renderRecords();
     </script>
 </body>
 
