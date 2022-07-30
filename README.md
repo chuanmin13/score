@@ -1,12 +1,18 @@
 # scoreCounter 記分板
 
+- RWD畫面切版
+- 活用 input 客製隊伍名稱、顏色
+- JS 操作 DOM 呈現客製資料、動態比數變化
+- 使用 session 紀錄比分
+
+---
+
 The nicely, functional scoreboard mainly for mobile devices.
 
 <p>You are all very welcome to use webScoreBoard throw the link:
 <a href="https://chuanmin13.github.io/scoreCounter/scoreCounter-m.html">https://chuanmin13.github.io/scoreCounter/#/</a></p>
 
 <img src="https://github.com/chuanmin13/scoreCounter/blob/main/img/scoreCounter.JPG?raw=true" width="500px"/> <img src="https://github.com/chuanmin13/scoreCounter/blob/main/img/scoreCounter-2.JPG?raw=true" width="500px"/>
-
 
 ### What can the webScoreBoard do:
 
