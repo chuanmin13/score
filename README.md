@@ -9,8 +9,7 @@
 
 The nicely, functional scoreboard mainly for mobile devices.
 
-<p>You are all very welcome to use webScoreBoard throw the link:
-<a href="https://chuanmin13.github.io/scoreCounter/scoreCounter-m.html">https://chuanmin13.github.io/scoreCounter/#/</a></p>
+[//]: # (<p>You are all very welcome to use webScoreBoard throw the link:<a href="https://chuanmin13.github.io/scoreCounter/scoreCounter-m.html">https://chuanmin13.github.io/scoreCounter/#/</a></p>)
 
 <img src="https://github.com/chuanmin13/scoreCounter/blob/main/img/scoreCounter.JPG?raw=true" width="500px"/> <img src="https://github.com/chuanmin13/scoreCounter/blob/main/img/scoreCounter-2.JPG?raw=true" width="500px"/>
 
