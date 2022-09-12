@@ -3,7 +3,7 @@
 - RWD畫面切版
 - 活用 input 客製隊伍名稱、顏色
 - JS 操作 DOM 呈現客製資料、動態比數變化
-- 使用 session 紀錄比分
+- 使用 sessionStorage 紀錄比分
 
 ---
 
