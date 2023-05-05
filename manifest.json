@@ -1,0 +1,15 @@
+{
+  "name": "ScoreCounter",
+  "short_name": "Score",
+  "theme_color": "white",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "scoreCalc-icon.svg",
+      "size": "any"
+    }
+  ]
+}
