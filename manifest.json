@@ -12,8 +12,8 @@
   "dir": "auto",
   "icons": [
     {
-      "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
-      "sizes": "any"
+      "src": "/scoreCalc.png",
+      "sizes": "512x512"
     },
     {
       "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
