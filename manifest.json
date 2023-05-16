@@ -16,7 +16,7 @@
       "size": "any"
     },
     {
-      "src": "./scoreCals.png",
+      "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png",
       "sizes": "512x512",
       "purpose": "any"
     }
