@@ -13,12 +13,28 @@
   "icons": [
     {
       "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
-      "size": "any"
+      "sizes": "any"
     },
     {
       "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
       "sizes": "512x512",
       "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/img/scoreCounter.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpg",
+      "platform": "wide",
+      "label": "Score counting display view"
+    },
+    {
+      "src": "/img/scoreCounter-2.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpg",
+      "platform": "wide",
+      "label": "Collapsable teams setting and game records view"
     }
   ]
 }
