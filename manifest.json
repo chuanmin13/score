@@ -1,6 +1,6 @@
 {
   "name": "ScoreCounter",
-  "short_name": "Score",
+  "short_name": "ScoreCounter",
   "description": "ScoreCounter is a functional score counter for volleyball games. ScoreCounter 是一個可存取紀錄、客製隊伍資訊的多功能球類運動記分板。",
   "start_url": "./",
   "theme_color": "#ffffff",
@@ -12,11 +12,11 @@
   "dir": "auto",
   "icons": [
     {
-      "src": "scoreCalc-icon.svg",
+      "src": "./scoreCalc-icon.svg",
       "size": "any"
     },
     {
-      "src": "scoreCals.png",
+      "src": "./scoreCals.png",
       "sizes": "512x512",
       "purpose": "any"
     }
