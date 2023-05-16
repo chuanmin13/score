@@ -12,11 +12,11 @@
   "dir": "auto",
   "icons": [
     {
-      "src": "./scoreCalc-icon.svg",
+      "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
       "size": "any"
     },
     {
-      "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png",
+      "src": "https://github.com/chuanmin13/scoreCounter/blob/main/scoreCalc.png?raw=true",
       "sizes": "512x512",
       "purpose": "any"
     }
