@@ -24,7 +24,6 @@ this.addEventListener("fetch", event => {
     caches.match(event.request)
       .then(response => {
         if (response) {
-          alert('Useing Catch!')
           return response
         } 
 
