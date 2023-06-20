@@ -788,9 +788,8 @@
             window.onload = () => {
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.register("/sw.js")
-                    .then((message) => {
-                        console.log('Service Workers 註冊')
-                    })
+                        .then(message => console.log('Service Workers 註冊'))
+                        .catch(e => console.warn(e))
                 }
             }
 
