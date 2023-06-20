@@ -3,20 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" />
 
         <title>webScoreBoard</title>
 
         <!-- google-font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Concert+One&family=Arima&family=Kosugi+Maru&display=swap"
             rel="stylesheet"
-        />
+        /> -->
 
         <!-- icon -->
         <link
@@ -68,6 +65,8 @@
         <meta name="theme-color" content="#ffffff" />
 
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Arima&family=Kosugi+Maru&display=swap');
+
             * {
                 box-sizing: border-box;
             }
@@ -553,7 +552,7 @@
                         <div class="nav-inner-wrap">
                             <div class="info-wrap">
                                 <div class="info-text">
-                                    <h4>How to use:</h4>
+                                    <h3>How to use:</h3>
                                     <p>
                                         1. Tap/click the score to add ONE point
                                     </p>
@@ -614,12 +613,12 @@
                                         <p>xx:xx</p>
                                     </div>
                                 </div>
-                                <!-- <button
+                                <button
                                     class="resetBtn btn"
                                     onclick="resetScore(); navToggle();"
                                 >
                                     重置比數 Reset
-                                </button> -->
+                                </button>
                             </div>
                             <div class="setting-wrap">
                                 <div class="input-wrap">
@@ -636,8 +635,10 @@
                                             placeholder="Team A"
                                             value=""
                                         />
+                                        <label for="redClr'" />
                                         <input
                                             id="redClr"
+                                            name="redClr"
                                             type="color"
                                             class="setClr"
                                             value="#cd2424"
@@ -655,8 +656,10 @@
                                             placeholder="Team B"
                                             value=""
                                         />
+                                        <label for="blueClr'" />
                                         <input
                                             id="blueClr"
+                                            name="blueClr"
                                             type="color"
                                             class="setClr"
                                             value="#244ecd"
@@ -780,6 +783,16 @@
                     false
                 );
             };
+
+            // Service Workers
+            window.onload = () => {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register("/sw.js")
+                    .then((message) => {
+                        console.log('Service Workers 註冊')
+                    })
+                }
+            }
 
             // 分數計算
             const redTeam = document.querySelector("#redTeam");
