@@ -787,7 +787,7 @@
             // Service Workers
             window.onload = () => {
                 if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.register("/sw.js")
+                    navigator.serviceWorker.register("/sw.js", { scope: "/" })
                         .then(message => console.log('Service Workers 註冊'))
                         .catch(e => console.warn(e))
                 }
