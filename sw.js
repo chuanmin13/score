@@ -3,6 +3,8 @@ const addResourcesToCache = async (resources) => {
   await cache.addAll(resources)
 }
 
+
+
 this.addEventListener('install', event => {
   console.log('Perform install steps')
   event.waitUntil(
@@ -45,24 +47,3 @@ this.addEventListener("fetch", event => {
   )
 })
 
-this.addEventListener('message', function (e) {
-  // e.source is a client object
-  e.source.postMessage('Hello! Your message was: ' + e.data);
-});
-
-function sendMessage(message) {
-  console.log('Send message...');
-  return new Promise(function (resolve, reject) {
-    var messageChannel = new MessageChannel();
-    messageChannel.port1.onmessage = function (event) {
-      if (event.data.error) {
-        reject(event.data.error);
-      } else {
-        resolve(event.data);
-      }
-    };
-    navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2]);
-  });
-}
-
-sendMessage('Hello World!');
