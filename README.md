@@ -1,5 +1,8 @@
 # scoreCounter 記分板
 
+- PWA(Progressive Web App) 2023.6.20 導入 Service Workers
+- 可以下載至裝置桌面作為 app 使用：[下載流程]
+
 - RWD畫面切版
 - 活用 input 客製隊伍名稱、顏色
 - JS 操作 DOM 呈現客製資料、動態比數變化
@@ -15,6 +18,7 @@ The nicely, functional scoreboard mainly for mobile devices.
 
 ### What can the webScoreBoard do:
 
+- PWA(Progressive Web App)
 - Customize teams’ names and colors 
 - Add up and deduct scores
 - Keep records up to 5 sets

@@ -232,7 +232,7 @@
                     #39407d 100%
                 ); */
                 font-size: 18px;
-                padding: 20px;
+                padding: 16px;
             }
 
             .input-wrap {
@@ -508,7 +508,7 @@
 
                 .score {
                     font-size: 40vw;
-                    line-height: 35vw;
+                    line-height: 32vw;
                 }
 
                 .team-name {
@@ -545,11 +545,12 @@
             </div>
             <button
                 class="btn outside-reset outside-btn"
+                style="line-height: 15px;"
                 onclick="resetScore();"
             >
                 Reset<br />比數<br />歸零
             </button>
-            <button class="btn record-set outside-btn" onclick="recordset();">
+            <button class="btn record-set outside-btn" style="line-height: 15px;" onclick="recordset();">
                 Save<br />紀録<br />比分
             </button>
             <div class="nav-wrap">
@@ -622,6 +623,7 @@
                                 </div>
                                 <button
                                     class="resetBtn btn"
+                                    style="padding: 12px;"
                                     onclick="resetScore(); navToggle();"
                                 >
                                     重置比數 Reset
@@ -807,11 +809,11 @@
                                         navigator.serviceWorker.getRegistration().then(reg => {
                                         var options = {
                                             // icon: './assets/images/android_048.png',
-                                            body: 'Welcome to ScoreCounter! Have a nice game:)',
+                                            body: 'Welcome! Have a nice game:)',
                                             // image: 'https://augt-forum-upload.s3-ap-southeast-1.amazonaws.com/original/1X/6b3cd55281b7bedea101dc36a6ef24034806390b.png'
                                         };
-                                        reg.showNotification('Angular User Group Taiwan', options);
-                                        console.log('displayNotification');
+                                        reg.showNotification('ScoreCounter Volleyball', options);
+                                        // console.log('displayNotification');
                                         });
                                     }
                                 })
