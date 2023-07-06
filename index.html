@@ -545,7 +545,7 @@
         </div>
 
         <div class="container">
-            <!-- <div class="hamburger">
+            <div class="hamburger">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
@@ -559,9 +559,9 @@
             </button>
             <button class="btn record-set outside-btn" style="line-height: 15px;" onclick="recordset();">
                 Save<br />紀録<br />比分
-            </button> -->
+            </button>
 
-            <div style="z-index: 999;">
+            <!-- <div style="z-index: 999;">
                 <button style="background-color: #222; color: #fff;"  id="getAccess">Get access to camera</button>
                 <button style="background-color: #222; color: #fff;"  id="takePhoto">Take photo</button>
                 <button style="background-color: #222; color: #fff;" id="cameraBtn">Open ccamera</button>
@@ -569,9 +569,9 @@
                 <canvas style="background-color: #222; color: #fff;"  width="500" height="700" ></canvas>
                 <video autoplay></video>
                 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> 
-            </div>
+            </div> -->
 
-            <!-- <div class="nav-wrap">
+            <div class="nav-wrap">
                 <div class="open-nav">
                     <div class="nav-list">
                         <h1>Score Counter</h1>
@@ -750,7 +750,7 @@
                                 <use xlink:href="#Capa_1"></use>
                             </svg>
                             <!-- <button id="redMinus" class="minus-btn">-</button> -->
-                        <!-- </div>
+                        </div>
                         <div id="redTeam" class="red score-card">
                             <div id="aName" class="team-name">Team A</div>
                             <div class="red-score score" data-color="red">
@@ -781,53 +781,53 @@
                         </div>
                     </div>
                 </div>
-            </div> --> -->
+            </div>
         </div>
 
         <script>
-            document.getElementById('cameraBtn').addEventListener('click', () => {
-                navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    facingMode: {
-                        //Use the back camera
-                        exact: 'environment'
-                    }
-                })
-            })
+            // document.getElementById('cameraBtn').addEventListener('click', () => {
+            //     navigator.mediaDevices.getUserMedia({
+            //         video: true,
+            //         facingMode: {
+            //             //Use the back camera
+            //             exact: 'environment'
+            //         }
+            //     })
+            // })
 
-            document.getElementById('getAccess').addEventListener('click', async () => {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({
-                        audio: false,
-                        video: true
-                    })
-                    const videoTracks = stream.getVideoTracks()
-                    const track = videoTracks[0]
-                    alert(`Getting video from: ${track.label}`)
-                    document.querySelector('video').srcObject = stream
-                    document.querySelector('#getAccess').setAttribute('hidden', true)
-                // //The video stream is stopped by track.stop() after 3 second of playback.
-                //     setTimeout(() =&gt; { track.stop() }, 3 * 1000)
-                } catch (error) {
-                    alert(`${error.name}`)
-                    console.error(error)
-                }
-            })
+            // document.getElementById('getAccess').addEventListener('click', async () => {
+            //     try {
+            //         const stream = await navigator.mediaDevices.getUserMedia({
+            //             audio: false,
+            //             video: true
+            //         })
+            //         const videoTracks = stream.getVideoTracks()
+            //         const track = videoTracks[0]
+            //         alert(`Getting video from: ${track.label}`)
+            //         document.querySelector('video').srcObject = stream
+            //         document.querySelector('#getAccess').setAttribute('hidden', true)
+            //     // //The video stream is stopped by track.stop() after 3 second of playback.
+            //     //     setTimeout(() =&gt; { track.stop() }, 3 * 1000)
+            //     } catch (error) {
+            //         alert(`${error.name}`)
+            //         console.error(error)
+            //     }
+            // })
 
-            var takePhotoButton = document.querySelector('button#takePhoto');
-            var canvas = document.querySelector('canvas');
-            takePhotoButton.onclick = takePhoto;
-            // Get a Blob from the currently selected camera source and
-            // display this with an img element.
-            function takePhoto() {
-            imageCapture.takePhoto().then(function(blob) {
-                console.log('Took photo:', blob);
-                img.classList.remove('hidden');
-                img.src = URL.createObjectURL(blob);
-            }).catch(function(error) {
-                console.log('takePhoto() error: ', error);
-            });
-            }
+            // var takePhotoButton = document.querySelector('button#takePhoto');
+            // var canvas = document.querySelector('canvas');
+            // takePhotoButton.onclick = takePhoto;
+            // // Get a Blob from the currently selected camera source and
+            // // display this with an img element.
+            // function takePhoto() {
+            // imageCapture.takePhoto().then(function(blob) {
+            //     console.log('Took photo:', blob);
+            //     img.classList.remove('hidden');
+            //     img.src = URL.createObjectURL(blob);
+            // }).catch(function(error) {
+            //     console.log('takePhoto() error: ', error);
+            // });
+            // }
 
 
 
