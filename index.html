@@ -560,6 +560,14 @@
             <button class="btn record-set outside-btn" style="line-height: 15px;" onclick="recordset();">
                 Save<br />紀録<br />比分
             </button>
+
+            <div style="position: absolute; top: 50%; left: 50%">
+                <Button id="cameraBtn">Open ccamera</Button>
+                <button id="getAccess">Get access to camera</button>
+                <button id="takePhoto">Take photo</button>
+                <canvas width="500" height="700" ></canvas>
+            </div>
+
             <div class="nav-wrap">
                 <div class="open-nav">
                     <div class="nav-list">
@@ -774,6 +782,57 @@
         </div>
 
         <script>
+            document.getElementById('cameraBtn').addEventListener('click', () => {
+                navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    minAspectRatio: 1.333,
+                    minFrameRate: 30,
+                    width: 1280,
+                    heigth: 720,
+                    facingMode: {
+                        //Use the back camera
+                        exact: 'environment'
+                    }
+                })
+            })
+
+            document.getElementById('getAccess').addEventListener('click', async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        audio: false,
+                        video: true
+                    })
+                    const videoTracks = stream.getVideoTracks()
+                    const track = videoTracks[0]
+                    alert(`Getting video from: ${track.label}`)
+                    // document.querySelector('video').srcObject = stream
+                    document.querySelector('#getAccess').setAttribute('hidden', true)
+                // //The video stream is stopped by track.stop() after 3 second of playback.
+                //     setTimeout(() =&gt; { track.stop() }, 3 * 1000)
+                } catch (error) {
+                    alert(`${error.name}`)
+                    console.error(error)
+                }
+            })
+
+            var takePhotoButton = document.querySelector('button#takePhoto');
+            var canvas = document.querySelector('canvas');
+            takePhotoButton.onclick = takePhoto;
+            // Get a Blob from the currently selected camera source and
+            // display this with an img element.
+            function takePhoto() {
+            imageCapture.takePhoto().then(function(blob) {
+                console.log('Took photo:', blob);
+                img.classList.remove('hidden');
+                img.src = URL.createObjectURL(blob);
+            }).catch(function(error) {
+                console.log('takePhoto() error: ', error);
+            });
+            }
+
+
+
+
             // safari手機網頁 prevent double tap scale
             window.onload = () => {
                 document.addEventListener(
