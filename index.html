@@ -566,6 +566,9 @@
                 <button style="background-color: #222; color: #fff;"  id="getAccess">Get access to camera</button>
                 <button style="background-color: #222; color: #fff;"  id="takePhoto">Take photo</button>
                 <canvas style="background-color: #222; color: #fff;"  width="500" height="700" ></canvas>
+                <video autoplay></video>
+                <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> 
+                <input type="file" capture="environment" accept="'image">
             </div>
 
             <!-- <div class="nav-wrap">
@@ -747,7 +750,7 @@
                                 <use xlink:href="#Capa_1"></use>
                             </svg>
                             <!-- <button id="redMinus" class="minus-btn">-</button> -->
-                        </div>
+                        <!-- </div>
                         <div id="redTeam" class="red score-card">
                             <div id="aName" class="team-name">Team A</div>
                             <div class="red-score score" data-color="red">
@@ -778,17 +781,13 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div> --> -->
         </div>
 
         <script>
             document.getElementById('cameraBtn').addEventListener('click', () => {
                 navigator.mediaDevices.getUserMedia({
                     video: true,
-                    minAspectRatio: 1.333,
-                    minFrameRate: 30,
-                    width: 1280,
-                    heigth: 720,
                     facingMode: {
                         //Use the back camera
                         exact: 'environment'
@@ -805,7 +804,7 @@
                     const videoTracks = stream.getVideoTracks()
                     const track = videoTracks[0]
                     alert(`Getting video from: ${track.label}`)
-                    // document.querySelector('video').srcObject = stream
+                    document.querySelector('video').srcObject = stream
                     document.querySelector('#getAccess').setAttribute('hidden', true)
                 // //The video stream is stopped by track.stop() after 3 second of playback.
                 //     setTimeout(() =&gt; { track.stop() }, 3 * 1000)
