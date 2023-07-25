@@ -560,7 +560,7 @@
             <button class="btn record-set outside-btn" style="line-height: 15px;" onclick="recordset();">
                 Save<br />紀録<br />比分
             </button>
-
+<!-- 
             <div style="z-index: 999;">
                 <button style="background-color: #222; color: #fff;"  id="getAccess">Get access to camera</button>
                 <button style="background-color: #222; color: #fff;"  id="takePhoto">Take photo</button>
@@ -569,7 +569,7 @@
                 <canvas style="background-color: #222; color: #fff;"  width="500" height="700" ></canvas>
                 <video autoplay></video>
                 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> 
-            </div>
+            </div> -->
 
             <div class="nav-wrap">
                 <div class="open-nav">
@@ -785,7 +785,7 @@
         </div>
 
         <script>
-            document.getElementById('cameraBtn').addEventListener('click', () => {
+            /* document.getElementById('cameraBtn').addEventListener('click', () => {
                 navigator.mediaDevices.getUserMedia({
                     video: true,
                     facingMode: {
@@ -827,7 +827,7 @@
             }).catch(function(error) {
                 console.log('takePhoto() error: ', error);
             });
-            }
+            } */
 
 
 
@@ -859,7 +859,7 @@
             };
 
             // Service Workers
-            window.onload = () => {
+            /* window.onload = () => {
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.register("/sw.js", { scope: "/" })
                         .then(message => {
@@ -886,7 +886,7 @@
                         })
                         .catch(e => console.warn(e))
                 }
-            }
+            } */
 
             // 分數計算
             const redTeam = document.querySelector("#redTeam");
